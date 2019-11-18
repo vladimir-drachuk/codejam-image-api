@@ -116,9 +116,13 @@
                             anchorTag.addEventListener('click', (e) => {
                                 e.preventDefault()
                                 const authenticator = new netlify.default ({})
-                                 authenticator.authenticate({provider:"github", scope: "user"}, (err, data) => {
-                                    err ? outputText.innerText = "Error Authenticating with GitHub: " + err : 
-                                     console.dir(data)//outputText.innerText = "Authenticated with GitHub. Access Token: " + data//.token
+                                authenticator.authenticate({provider:"github", scope: "user"}, (err, data) => {
+        if (err) {outputText.innerText = "Error Authenticating with GitHub: " + err
+        } else {
+          let response = fetch('https://api.github.com/user',{headers: {
+            'Authorization': ` token ${data.token}`,}});
+            console.dir(response);
+          } //outputText.innerText = "Authenticated with GitHub. Access Token: " + data//.token
                                 })
                             })
                         </script>
