@@ -119,11 +119,14 @@
                                 authenticator.authenticate({provider:"github", scope: "user"}, (err, data) => {
         if (err) {outputText.innerText = "Error Authenticating with GitHub: " + err
         } else {
+           async function Request() {
           let response = await fetch('https://api.github.com/user',{headers: {
             'Authorization': ` token ${data.token}`,}});
           let myFile = await response.json();
           console.log(JSON.stringify(myFile));
             console.log('with fetch');
+           }
+            Request();
           } //outputText.innerText = "Authenticated with GitHub. Access Token: " + data//.token
                                 })
                             })
