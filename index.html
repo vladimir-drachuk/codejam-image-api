@@ -29,6 +29,12 @@
         #link:active {
             background-color: #5e5e5e;
         }
+        #output {
+            margin-top: 20px;
+        }
+        #avatar {
+            display: none;
+        }
     </style>
     <title>codejam-image-api</title>
 </head>
@@ -110,24 +116,29 @@
                         <input type="search" name="town" class="input-choose-town" placeholder="enter the name of the city">
                         <p id="link"><a href="#" id="login">Authenticate with GitHub</a></p>
                         <p id="output"></p>
+                        <img id="avatar" src="#" alt="avatar">
                         <script>
                             const anchorTag = document.getElementById('login')
                             const outputText = document.getElementById('output')
+                            const avatar = document.getElementById('avatar')
                             anchorTag.addEventListener('click', (e) => {
                                 e.preventDefault()
                                 const authenticator = new netlify.default ({})
                                 authenticator.authenticate({provider:"github", scope: "user"}, (err, data) => {
-        if (err) {outputText.innerText = "Error Authenticating with GitHub: " + err
-        } else {
-           async function Request() {
-           let response = await fetch('https://api.github.com/user',{
-               headers: {
-                    'Authorization': ` token ${data.token}`,}});
-          let myFile = await response.json();
-          outputText.innerText = `Authenticated with GitHub. Login: ${myFile.login}, Id: ${myFile.id}`
-           }
-            Request();
-          } //outputText.innerText = "Authenticated with GitHub. Access Token: " + data//.token
+                                 if (err) {
+                                     outputText.innerText = "Error Authenticating with GitHub: " + err
+                                 } else {
+                                    async function Request() {
+                                        let response = await fetch('https://api.github.com/user',{
+                                            headers: {
+                                               'Authorization': ` token ${data.token}`,}});
+                                        let myFile = await response.json();
+                                        outputText.innerText = `Authenticated with GitHub. Login: ${myFile.login}\nId: ${myFile.id}`
+                                        avatar.style.display = 'block';
+                                        avatar.src = myFile.avatar_url;
+                                    }
+                                    Request();
+                                    }
                                 })
                             })
                         </script>
