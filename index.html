@@ -30,10 +30,14 @@
             background-color: #5e5e5e;
         }
         #output {
-            margin-top: 20px;
+           margin: 20px 0;
+           text-align: center;
         }
         #avatar {
             display: none;
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
         }
     </style>
     <title>codejam-image-api</title>
@@ -133,7 +137,7 @@
                                             headers: {
                                                'Authorization': ` token ${data.token}`,}});
                                         let myFile = await response.json();
-                                        outputText.innerText = `Authenticated with GitHub. Login: ${myFile.login}\nId: ${myFile.id}`
+                                        outputText.innerText = `Authenticated successful\nLogin: ${myFile.login}\nId: ${myFile.id}`
                                         avatar.style.display = 'block';
                                         avatar.src = myFile.avatar_url;
                                     }
