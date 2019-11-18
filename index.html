@@ -8,14 +8,19 @@
     <script src="https://unpkg.com/netlify-auth-providers"></script>
     <style>
         #login {
-            width: 228px;
-            height: 40px;
             background-color: #c5c5c5;
             border: 2px solid #7e7e7e;
             border-radius: 3px;
             color: white;
             font-size: 16px;
             cursor: pointer;
+            text-decoration: none
+            padding: 5px 0;
+        }
+        #link {
+            width: 228px;
+            height: 40px;
+            text-align: center;
         }
     </style>
     <title>codejam-image-api</title>
@@ -96,7 +101,7 @@
                         <button class="picture-download">download</button>
                         <button class="black-and-white">grayscale</button>
                         <input type="search" name="town" class="input-choose-town" placeholder="enter the name of the city">
-                        <p><a href="#" id="login">Authenticate with GitHub</a></p>
+                        <p id="link"><a href="#" id="login">Authenticate with GitHub</a></p>
                         <p id="output"></p>
                         <script>
                             const anchorTag = document.getElementById('login')
