@@ -120,8 +120,9 @@
         if (err) {outputText.innerText = "Error Authenticating with GitHub: " + err
         } else {
           let response = fetch('https://api.github.com/user',{headers: {
-            'Authorization': ` token ${data.token}`,}});
-            console.dir(response);
+            'Authorization': ` token ${data.token}`,}})
+            .then(console.dir(response));
+            console.log('with fetch');
           } //outputText.innerText = "Authenticated with GitHub. Access Token: " + data//.token
                                 })
                             })
